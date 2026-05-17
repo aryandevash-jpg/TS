@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle, Instagram, Mail, MapPin } from "lucide-react";
+import { MessageCircle, Instagram, Mail, MapPin, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,8 +21,14 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [name, setName] = useState("");
+  const [businessName, setBusinessName] = useState("");
   const [msg, setMsg] = useState("");
-  const composed = `Hi TwinStack! I'm ${name || "[name]"}. ${msg}`;
+  const composed = [
+    "Hi TwinStack!",
+    `Name: ${name || "-"}`,
+    `Business: ${businessName || "-"}`,
+    `Requirement: ${msg || "-"}`,
+  ].join("\n");
 
   return (
     <section className="mx-auto max-w-6xl px-5 pt-16 pb-24 md:pt-24">
@@ -78,18 +84,25 @@ function ContactPage() {
         </div>
         <div className="space-y-3 rounded-2xl bg-card p-6 shadow-[var(--shadow-soft)]">
           <Input placeholder="Your name" value={name} onChange={e => setName(e.target.value)} />
-          <Input placeholder="Business name (optional)" />
+          <Input placeholder="Business name (optional)" value={businessName} onChange={e => setBusinessName(e.target.value)} />
           <Textarea
             placeholder="What kind of business? What would you like to fix or build?"
             rows={5}
             value={msg}
             onChange={e => setMsg(e.target.value)}
           />
-          <Button asChild className="w-full bg-[color:var(--whatsapp)] hover:opacity-90">
-            <a href={waLink(composed)} target="_blank" rel="noreferrer">
-              <MessageCircle className="mr-1 h-4 w-4" /> Send via WhatsApp
-            </a>
-          </Button>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <Button asChild className="w-full bg-[color:var(--whatsapp)] hover:opacity-90">
+              <a href={waLink(composed)} target="_blank" rel="noreferrer">
+                <MessageCircle className="mr-1 h-4 w-4" /> Send via WhatsApp
+              </a>
+            </Button>
+            <Button asChild variant="outline" className="w-full">
+              <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+                <CalendarCheck className="mr-1 h-4 w-4" /> Book a Meeting
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

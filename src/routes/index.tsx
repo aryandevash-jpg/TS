@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MessageCircle, MapPin, Languages, Clock, Wallet, Heart, CalendarCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { CONTACT, waLink } from "@/lib/contact";
+import { CONTACT, openCalendlyPopup, waLink } from "@/lib/contact";
 import heroImg from "@/assets/hero-rishikesh.jpg";
 import galleryImg from "@/assets/sample-gallery.jpg";
 
@@ -39,7 +39,7 @@ function Hero() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button asChild size="lg">
-            <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+            <a href={CONTACT.calendly} onClick={openCalendlyPopup}>
               Book a free meeting <CalendarCheck className="ml-1 h-4 w-4" />
             </a>
           </Button>
@@ -165,7 +165,7 @@ function ContactTeaser() {
           </div>
           <div className="flex flex-col gap-3 md:items-end">
             <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
-              <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+              <a href={CONTACT.calendly} onClick={openCalendlyPopup}>
                 <CalendarCheck className="mr-1 h-4 w-4" /> Book on Calendly
               </a>
             </Button>

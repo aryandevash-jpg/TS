@@ -7,7 +7,7 @@ import { BookingWidget } from "@/components/site/BookingWidget";
 import { SERVICES } from "@/components/site/services";
 import { Heart, Bookmark, MessageCircle, Send, TrendingUp, Users, Eye, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CONTACT, waLink } from "@/lib/contact";
+import { CONTACT, openCalendlyPopup, waLink } from "@/lib/contact";
 import food from "@/assets/sample-food.jpg";
 import yoga from "@/assets/sample-yoga.jpg";
 import room from "@/assets/sample-room.jpg";
@@ -158,7 +158,7 @@ function SamplesPage() {
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild>
-            <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+            <a href={CONTACT.calendly} onClick={openCalendlyPopup}>
               <CalendarCheck className="mr-1 h-4 w-4" /> Book a free consult
             </a>
           </Button>

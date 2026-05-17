@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { CONTACT, waLink } from "@/lib/contact";
+import { CONTACT, openCalendlyPopup, waLink } from "@/lib/contact";
 import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
@@ -98,7 +98,7 @@ function ContactPage() {
               </a>
             </Button>
             <Button asChild variant="outline" className="w-full">
-              <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+              <a href={CONTACT.calendly} onClick={openCalendlyPopup}>
                 <CalendarCheck className="mr-1 h-4 w-4" /> Book a Meeting
               </a>
             </Button>

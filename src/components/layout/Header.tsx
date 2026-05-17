@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CONTACT, waLink } from "@/lib/contact";
+import { CONTACT, openCalendlyPopup, waLink } from "@/lib/contact";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -39,7 +39,7 @@ export function Header() {
 
         <div className="hidden md:block">
           <Button asChild size="sm">
-            <a href={CONTACT.calendly} target="_blank" rel="noreferrer">Book Meeting</a>
+            <a href={CONTACT.calendly} onClick={openCalendlyPopup}>Book Meeting</a>
           </Button>
         </div>
 
@@ -69,8 +69,8 @@ export function Header() {
             ))}
             <a
               href={CONTACT.calendly}
-              target="_blank"
-              rel="noreferrer"
+              onClick={openCalendlyPopup}
+             
               className="mt-2 rounded-md bg-primary px-3 py-2.5 text-center text-sm font-medium text-primary-foreground"
             >
               Book Meeting

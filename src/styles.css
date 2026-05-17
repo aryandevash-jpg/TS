@@ -38,47 +38,47 @@
   --color-whatsapp: var(--whatsapp);
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
-  --shadow-soft: 0 1px 2px rgb(60 40 20 / 0.04), 0 8px 24px -8px rgb(60 40 20 / 0.08);
-  --shadow-lift: 0 2px 4px rgb(60 40 20 / 0.05), 0 20px 40px -12px rgb(60 40 20 / 0.15);
+  --shadow-soft: 0 1px 2px rgb(45 45 45 / 0.05), 0 8px 24px -8px rgb(45 45 45 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(45 45 45 / 0.08), 0 20px 40px -12px rgb(45 45 45 / 0.16);
 }
 
 :root {
   --radius: 0.875rem;
 
-  /* Earthy palette */
-  --background: oklch(0.985 0.008 80);            /* warm white */
-  --foreground: oklch(0.22 0.02 60);              /* deep charcoal */
+  /* Glassdoor-inspired palette */
+  --background: #f3f3f3;
+  --foreground: #2d2d2d;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 60);
+  --card: #ffffff;
+  --card-foreground: #2d2d2d;
+  --popover: #ffffff;
+  --popover-foreground: #2d2d2d;
 
-  --primary: oklch(0.38 0.07 150);                /* forest green */
-  --primary-foreground: oklch(0.985 0.008 80);
+  --primary: #0caa41;
+  --primary-foreground: #ffffff;
 
-  --secondary: oklch(0.93 0.025 70);              /* sandstone */
-  --secondary-foreground: oklch(0.28 0.04 60);
+  --secondary: #dcf5e5;
+  --secondary-foreground: #2d2d2d;
 
-  --muted: oklch(0.95 0.012 75);
-  --muted-foreground: oklch(0.48 0.02 65);
+  --muted: #f8f8f8;
+  --muted-foreground: #6f6f6f;
 
-  --accent: oklch(0.88 0.06 75);                  /* warm sand accent */
-  --accent-foreground: oklch(0.28 0.04 60);
+  --accent: #dcf5e5;
+  --accent-foreground: #2d2d2d;
 
-  --destructive: oklch(0.55 0.2 28);
-  --destructive-foreground: oklch(0.985 0.008 80);
+  --destructive: #ff6d2d;
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(0.9 0.018 75);
-  --input: oklch(0.9 0.018 75);
-  --ring: oklch(0.38 0.07 150);
+  --border: #e6e6e6;
+  --input: #e6e6e6;
+  --ring: #179245;
 
-  --sandstone: oklch(0.93 0.03 72);
-  --sandstone-deep: oklch(0.82 0.05 65);
-  --forest: oklch(0.38 0.07 150);
-  --forest-deep: oklch(0.28 0.06 150);
-  --gold: oklch(0.72 0.13 75);
-  --whatsapp: oklch(0.62 0.16 145);
+  --sandstone: #f3f3f3;
+  --sandstone-deep: #d9d9d9;
+  --forest: #0caa41;
+  --forest-deep: #179245;
+  --gold: #ff6d2d;
+  --whatsapp: #179245;
 }
 
 @layer base {

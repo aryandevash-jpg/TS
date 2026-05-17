@@ -1,10 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MessageCircle, MapPin, Languages, Clock, Wallet, Heart } from "lucide-react";
+import { ArrowRight, MessageCircle, MapPin, Languages, Clock, Wallet, Heart, CalendarCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SERVICES } from "@/components/site/services";
-import { ServiceCard } from "@/components/site/ServiceCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { waLink } from "@/lib/contact";
+import { CONTACT, waLink } from "@/lib/contact";
 import heroImg from "@/assets/hero-rishikesh.jpg";
 
 export const Route = createFileRoute("/")({
@@ -33,19 +31,24 @@ function Hero() {
           Based in Rishikesh · Open this summer
         </div>
         <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl">
-          We help <span className="text-primary">Rishikesh businesses</span> grow online.
+          More bookings, better brand, less digital stress.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          From websites to Google listings — we handle everything digital, so you can focus on your business.
+          We help Rishikesh businesses look premium online and convert views into customers.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button asChild size="lg">
-            <Link to="/services">See What We Offer <ArrowRight className="ml-1 h-4 w-4" /></Link>
+            <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+              Book a free meeting <CalendarCheck className="ml-1 h-4 w-4" />
+            </a>
           </Button>
           <Button asChild size="lg" variant="outline" className="border-[color:var(--whatsapp)] text-[color:var(--whatsapp)] hover:bg-[color:var(--whatsapp)]/5 hover:text-[color:var(--whatsapp)]">
             <a href={waLink()} target="_blank" rel="noreferrer">
               <MessageCircle className="mr-1 h-4 w-4" /> Chat on WhatsApp
             </a>
+          </Button>
+          <Button asChild size="lg" variant="ghost">
+            <Link to="/samples">See live samples <ArrowRight className="ml-1 h-4 w-4" /></Link>
           </Button>
         </div>
 
@@ -97,28 +100,6 @@ function WhoWeAre() {
   );
 }
 
-function ServicesPreview() {
-  return (
-    <section className="bg-secondary/40 py-20">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="What We Do"
-            title="Everything digital, under one roof."
-            subtitle="Six focused services. Each one designed for how local Rishikesh businesses actually work."
-          />
-          <Button asChild variant="ghost" className="self-start md:self-end">
-            <Link to="/services">All services <ArrowRight className="ml-1 h-4 w-4" /></Link>
-          </Button>
-        </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map(s => <ServiceCard key={s.slug} service={s} />)}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 const WHY = [
   { icon: MapPin, title: "Local & in person", text: "We meet you face to face. No call centres, no time zones." },
   { icon: Wallet, title: "No agency fees", text: "One-time project pricing. No retainers, no surprise invoices." },
@@ -144,6 +125,31 @@ function WhyUs() {
   );
 }
 
+function TrustSection() {
+  const companies = ["IIT Roorkee", "Allen Digital", "Newton School of Technology", "pakhsa.in"];
+  return (
+    <section className="mx-auto max-w-6xl px-5 py-8 md:py-12">
+      <div className="rounded-3xl border border-border bg-card px-6 py-7 shadow-[var(--shadow-soft)] md:px-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary">
+              <Sparkles className="h-4 w-4" /> Trusted Experience
+            </p>
+            <p className="mt-2 text-lg font-semibold text-foreground">Worked with teams from:</p>
+          </div>
+          <div className="flex flex-wrap gap-2 md:justify-end">
+            {companies.map((company) => (
+              <span key={company} className="rounded-full border border-border bg-secondary px-4 py-2 text-sm font-medium text-foreground">
+                {company}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactTeaser() {
   return (
     <section className="mx-auto max-w-6xl px-5 pb-10">
@@ -152,13 +158,15 @@ function ContactTeaser() {
           <div>
             <p className="text-xs uppercase tracking-[0.2em] opacity-80">Let's talk</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
-              Interested? Let's grab a chai and talk.
+              Quick 15-min call. No pressure.
             </h2>
-            <p className="mt-3 max-w-lg opacity-85">
-              Send us a WhatsApp message, an Instagram DM, or just drop by. No pitches, no pressure — just a friendly chat about what your business needs.
-            </p>
           </div>
           <div className="flex flex-col gap-3 md:items-end">
+            <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
+              <a href={CONTACT.calendly} target="_blank" rel="noreferrer">
+                <CalendarCheck className="mr-1 h-4 w-4" /> Book on Calendly
+              </a>
+            </Button>
             <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
               <a href={waLink()} target="_blank" rel="noreferrer">
                 <MessageCircle className="mr-1 h-4 w-4" /> WhatsApp Us
@@ -179,7 +187,7 @@ function Home() {
     <>
       <Hero />
       <WhoWeAre />
-      <ServicesPreview />
+      <TrustSection />
       <WhyUs />
       <ContactTeaser />
     </>

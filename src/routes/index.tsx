@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MessageCircle, MapPin, Languages, Clock, Wallet, Heart } from "lucide-react";
+import { ArrowRight, MessageCircle, MapPin, Languages, Clock, Wallet, Heart, CalendarCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SERVICES } from "@/components/site/services";
-import { ServiceCard } from "@/components/site/ServiceCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { waLink } from "@/lib/contact";
+import { CONTACT, openCalendlyPopup, waLink } from "@/lib/contact";
 import heroImg from "@/assets/hero-rishikesh.jpg";
+import galleryImg from "@/assets/sample-gallery.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,8 +22,8 @@ function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" />
+        <img src={heroImg} alt="Rishikesh river view" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/0 to-background/0" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-5 pt-20 pb-24 md:pt-28 md:pb-32">
@@ -32,20 +31,25 @@ function Hero() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Based in Rishikesh · Open this summer
         </div>
-        <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl">
-          We help <span className="text-primary">Rishikesh businesses</span> grow online.
+        <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl text-white">
+          More bookings, better brand, less digital stress.
         </h1>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          From websites to Google listings — we handle everything digital, so you can focus on your business.
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg text-white">
+          We help Rishikesh businesses look premium online and convert views into customers.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button asChild size="lg">
-            <Link to="/services">See What We Offer <ArrowRight className="ml-1 h-4 w-4" /></Link>
+            <a href={CONTACT.calendly} onClick={openCalendlyPopup}>
+              Book a free meeting <CalendarCheck className="ml-1 h-4 w-4" />
+            </a>
           </Button>
           <Button asChild size="lg" variant="outline" className="border-[color:var(--whatsapp)] text-[color:var(--whatsapp)] hover:bg-[color:var(--whatsapp)]/5 hover:text-[color:var(--whatsapp)]">
             <a href={waLink()} target="_blank" rel="noreferrer">
               <MessageCircle className="mr-1 h-4 w-4" /> Chat on WhatsApp
             </a>
+          </Button>
+          <Button asChild size="lg" variant="ghost" className="text-white">
+            <Link to="/samples">Explore services <ArrowRight className="ml-1 h-4 w-4 text-white" /></Link>
           </Button>
         </div>
 
@@ -57,8 +61,8 @@ function Hero() {
             ["हिंदी + EN", "we speak both"],
           ].map(([k, v]) => (
             <div key={k}>
-              <p className="text-2xl font-semibold text-foreground">{k}</p>
-              <p className="text-xs text-muted-foreground">{v}</p>
+              <p className="text-2xl font-semibold text-foreground text-white">{k}</p>
+              <p className="text-xs text-muted-foreground text-white">{v}</p>
             </div>
           ))}
         </div>
@@ -84,35 +88,13 @@ function WhoWeAre() {
           </div>
         </div>
         <div className="relative">
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-soft)]">
-            <p className="text-sm leading-relaxed text-muted-foreground">
+          <img src={galleryImg} alt="Rishikesh street and local business area" className="h-72 w-full rounded-2xl object-cover shadow-[var(--shadow-soft)] md:h-80" loading="lazy" decoding="async" />
+          <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/30 bg-black/45 p-4 backdrop-blur-sm">
+            <p className="text-sm leading-relaxed text-white/90">
               "We're not an agency. There's just two of us, working out of a café in Tapovan with our laptops. We meet you in person, build what you need in a few days, hand over everything, and stay around if you need tweaks."
             </p>
-            <p className="mt-4 text-sm font-medium text-foreground">— TwinStack</p>
+            <p className="mt-3 text-sm font-medium text-white">— TwinStack</p>
           </div>
-          <div className="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-2xl bg-primary/10 md:block" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ServicesPreview() {
-  return (
-    <section className="bg-secondary/40 py-20">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="What We Do"
-            title="Everything digital, under one roof."
-            subtitle="Six focused services. Each one designed for how local Rishikesh businesses actually work."
-          />
-          <Button asChild variant="ghost" className="self-start md:self-end">
-            <Link to="/services">All services <ArrowRight className="ml-1 h-4 w-4" /></Link>
-          </Button>
-        </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map(s => <ServiceCard key={s.slug} service={s} />)}
         </div>
       </div>
     </section>
@@ -144,6 +126,32 @@ function WhyUs() {
   );
 }
 
+function TrustSection() {
+  const companies = ["IIT Roorkee", "Allen Digital", "Newton School of Technology", "pakhsa.in"];
+  return (
+    <section className="mx-auto max-w-6xl px-5 py-8 md:py-12">
+      <div className="relative overflow-hidden rounded-3xl border border-border bg-card px-6 py-7 shadow-[var(--shadow-soft)] md:px-10">
+        <img src={heroImg} alt="" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.08]" loading="lazy" decoding="async" />
+        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary">
+              <Sparkles className="h-4 w-4" /> Trusted Experience
+            </p>
+            <p className="mt-2 text-lg font-semibold text-foreground">Worked with teams from:</p>
+          </div>
+          <div className="flex flex-wrap gap-2 md:justify-end">
+            {companies.map((company) => (
+              <span key={company} className="rounded-full border border-border bg-secondary px-4 py-2 text-sm font-medium text-foreground">
+                {company}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactTeaser() {
   return (
     <section className="mx-auto max-w-6xl px-5 pb-10">
@@ -152,13 +160,15 @@ function ContactTeaser() {
           <div>
             <p className="text-xs uppercase tracking-[0.2em] opacity-80">Let's talk</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight md:text-4xl">
-              Interested? Let's grab a chai and talk.
+              Quick 15-min call. No pressure.
             </h2>
-            <p className="mt-3 max-w-lg opacity-85">
-              Send us a WhatsApp message, an Instagram DM, or just drop by. No pitches, no pressure — just a friendly chat about what your business needs.
-            </p>
           </div>
           <div className="flex flex-col gap-3 md:items-end">
+            <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
+              <a href={CONTACT.calendly} onClick={openCalendlyPopup}>
+                <CalendarCheck className="mr-1 h-4 w-4" /> Book on Calendly
+              </a>
+            </Button>
             <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
               <a href={waLink()} target="_blank" rel="noreferrer">
                 <MessageCircle className="mr-1 h-4 w-4" /> WhatsApp Us
@@ -179,7 +189,7 @@ function Home() {
     <>
       <Hero />
       <WhoWeAre />
-      <ServicesPreview />
+      <TrustSection />
       <WhyUs />
       <ContactTeaser />
     </>

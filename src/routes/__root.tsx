@@ -4,11 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
@@ -85,35 +82,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@TwinStack" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" },
-    ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();

@@ -2,12 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { waLink } from "@/lib/contact";
+import { CONTACT, openCalendlyPopup, waLink } from "@/lib/contact";
 
 const nav = [
   { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/samples", label: "Samples" },
+  { to: "/samples", label: "Services" },
   { to: "/pricing", label: "Pricing" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -39,8 +38,8 @@ export function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <Button asChild size="sm" className="bg-[color:var(--whatsapp)] hover:opacity-90">
-            <a href={waLink()} target="_blank" rel="noreferrer">WhatsApp Us</a>
+          <Button asChild size="sm">
+            <a href={CONTACT.calendly} onClick={openCalendlyPopup}>Book Meeting</a>
           </Button>
         </div>
 
@@ -69,10 +68,18 @@ export function Header() {
               </Link>
             ))}
             <a
+              href={CONTACT.calendly}
+              onClick={openCalendlyPopup}
+             
+              className="mt-2 rounded-md bg-primary px-3 py-2.5 text-center text-sm font-medium text-primary-foreground"
+            >
+              Book Meeting
+            </a>
+            <a
               href={waLink()}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 rounded-md bg-[color:var(--whatsapp)] px-3 py-2.5 text-center text-sm font-medium text-primary-foreground"
+              className="rounded-md bg-[color:var(--whatsapp)] px-3 py-2.5 text-center text-sm font-medium text-primary-foreground"
             >
               WhatsApp Us
             </a>

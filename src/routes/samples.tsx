@@ -15,6 +15,9 @@ import yoga from "@/assets/sample-yoga.jpg";
 import room from "@/assets/sample-room.jpg";
 import gallery from "@/assets/sample-gallery.jpg";
 import cafe from "@/assets/sample-cafe-hero.jpg";
+import heroRishikesh from "@/assets/hero-rishikesh.jpg";
+import smoke from "@/assets/smoke.jpg";
+import landscape from "@/assets/landscape.jpg";
 
 const SERVICE_BENEFITS: Record<string, string> = {
   website: "Build trust and get more direct bookings.",
@@ -49,37 +52,101 @@ export const Route = createFileRoute("/samples")({
 });
 
 function InstagramGrid() {
+  const [activeProfile, setActiveProfile] = useState<"aryanjndge" | "aryan_jr007">("aryanjndge");
+
+  const profiles = {
+    aryanjndge: {
+      username: "aryanjndge",
+      name: "Aryan | Developer",
+      bio: "💻 Building @TwinStack · Crafting premium web designs & apps · Tech Enthusiast",
+      posts: "142",
+      followers: "3.8k",
+      following: "284",
+      avatar: cafe,
+      images: [room, food, gallery, room, food, gallery, room, food, gallery]
+    },
+    aryan_jr007: {
+      username: "aryan_jr007",
+      name: "Aryan | Travel & Life",
+      bio: "🏔️ Exploring the mountains · Outdoor adventures · Capturing moments in Rishikesh",
+      posts: "95",
+      followers: "2.4k",
+      following: "198",
+      avatar: heroRishikesh,
+      images: [heroRishikesh, landscape, smoke, heroRishikesh, landscape, smoke, heroRishikesh, landscape, smoke]
+    }
+  };
+
+  const current = profiles[activeProfile];
+
   return (
     <div className="mx-auto max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]">
+      {/* Profile Selector Tabs */}
+      <div className="flex border-b border-border bg-secondary/30 p-1">
+        <button
+          onClick={() => setActiveProfile("aryanjndge")}
+          className={`flex-1 rounded-lg py-1.5 text-xs font-semibold transition-all ${
+            activeProfile === "aryanjndge"
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          @aryanjndge
+        </button>
+        <button
+          onClick={() => setActiveProfile("aryan_jr007")}
+          className={`flex-1 rounded-lg py-1.5 text-xs font-semibold transition-all ${
+            activeProfile === "aryan_jr007"
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          @aryan_jr007
+        </button>
+      </div>
+
+      {/* Profile Header */}
       <div className="flex items-center gap-3 border-b border-border p-4">
         <div className="h-12 w-12 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-500 p-0.5">
-          <img src={cafe} alt="Ganga Leaf profile" className="h-full w-full rounded-full border-2 border-card object-cover" loading="lazy" decoding="async" />
+          <img src={current.avatar} alt="Profile" className="h-full w-full rounded-full border-2 border-card object-cover" loading="lazy" />
         </div>
         <div className="flex-1">
-          <p className="text-sm font-semibold">gangaleaf</p>
-          <p className="text-xs text-muted-foreground">Café & Stay · Tapovan, Rishikesh</p>
+          <p className="text-sm font-semibold">{current.username}</p>
+          <p className="text-xs text-muted-foreground">{current.name}</p>
         </div>
-        <button className="rounded-md bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">Follow</button>
+        <button className="rounded-md bg-primary px-3 py-1 text-xs font-medium text-primary-foreground hover:opacity-90 transition-opacity">Follow</button>
       </div>
+
+      {/* Bio Section */}
+      <div className="px-4 py-3 border-b border-border bg-secondary/10">
+        <p className="text-xs leading-relaxed text-foreground font-medium">
+          {current.bio}
+        </p>
+      </div>
+
+      {/* Stats */}
       <div className="flex justify-around border-b border-border py-3 text-center text-xs">
-        <div><p className="font-semibold text-base">126</p><p className="text-muted-foreground">Posts</p></div>
-        <div><p className="font-semibold text-base">4.2k</p><p className="text-muted-foreground">Followers</p></div>
-        <div><p className="font-semibold text-base">312</p><p className="text-muted-foreground">Following</p></div>
+        <div><p className="font-semibold text-base">{current.posts}</p><p className="text-muted-foreground">Posts</p></div>
+        <div><p className="font-semibold text-base">{current.followers}</p><p className="text-muted-foreground">Followers</p></div>
+        <div><p className="font-semibold text-base">{current.following}</p><p className="text-muted-foreground">Following</p></div>
       </div>
+
+      {/* Image Grid */}
       <div className="grid grid-cols-3 gap-0.5">
-        {INSTAGRAM_IMAGES.map((src, i) => (
+        {current.images.map((src, i) => (
           <div key={i} className="relative aspect-square">
             <img src={src} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
             <div className="absolute inset-0 flex items-center justify-center gap-3 bg-black/0 text-xs font-semibold text-white opacity-0 transition hover:bg-black/40 hover:opacity-100">
-              <span className="flex items-center gap-1"><Heart className="h-3 w-3" fill="white" /> 240</span>
-              <span className="flex items-center gap-1"><MessageCircle className="h-3 w-3" fill="white" /> 18</span>
+              <span className="flex items-center gap-1"><Heart className="h-3 w-3" fill="white" /> {Math.floor(Math.random() * 100) + 120}</span>
+              <span className="flex items-center gap-1"><MessageCircle className="h-3 w-3" fill="white" /> {Math.floor(Math.random() * 20) + 5}</span>
             </div>
           </div>
         ))}
       </div>
+      
       <div className="flex items-center justify-between border-t border-border p-3 text-muted-foreground">
-        <div className="flex gap-3"><Heart className="h-5 w-5" /><MessageCircle className="h-5 w-5" /><Send className="h-5 w-5" /></div>
-        <Bookmark className="h-5 w-5" />
+        <div className="flex gap-3"><Heart className="h-5 w-5 hover:text-foreground cursor-pointer" /><MessageCircle className="h-5 w-5 hover:text-foreground cursor-pointer" /><Send className="h-5 w-5 hover:text-foreground cursor-pointer" /></div>
+        <Bookmark className="h-5 w-5 hover:text-foreground cursor-pointer" />
       </div>
     </div>
   );
@@ -126,7 +193,49 @@ function SamplesPage() {
   
   return (
     <>
-      <section className="mx-auto max-w-6xl px-5 pt-16 pb-8 md:pt-24">
+      {/* Website */}
+      <section id="website" className="mx-auto max-w-6xl px-5 pt-16 pb-12 md:pt-24 scroll-mt-20">
+        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary">01 · Service Part: Website</p>
+            <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Full sample website</h3>
+            <p className="mt-2 text-sm text-muted-foreground">Benefit: Build trust quickly and turn visitors into direct bookings.</p>
+          </div>
+          <div className="flex flex-col items-start md:items-end gap-3">
+            <div className="flex flex-wrap rounded-lg bg-secondary/50 p-1 gap-1">
+              <button
+                onClick={() => setActiveSite("rafting")}
+                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
+                  activeSite === "rafting" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Adventure Demo
+              </button>
+              <button
+                onClick={() => setActiveSite("cafe")}
+                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
+                  activeSite === "cafe" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Café Demo
+              </button>
+            </div>
+            <p className="text-sm text-muted-foreground">Scroll inside the frame ↓</p>
+          </div>
+        </div>
+        
+        {activeSite === "rafting" ? (
+          <BrowserFrame url="rishirafting.in">
+            <RaftingSample />
+          </BrowserFrame>
+        ) : (
+          <BrowserFrame url="gangaleaf.in">
+            <SampleWebsite />
+          </BrowserFrame>
+        )}
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-8">
         <SectionHeading
           eyebrow="Services"
           title="Services in action."
@@ -174,55 +283,37 @@ function SamplesPage() {
         </div>
       </section>
 
-      {/* Website */}
-      <section id="website" className="mx-auto max-w-6xl px-5 py-12 scroll-mt-20">
-        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary">01 · Service Part: Website</p>
-            <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Full sample website</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Benefit: Build trust quickly and turn visitors into direct bookings.</p>
-          </div>
-          <div className="flex flex-col items-start md:items-end gap-3">
-            <div className="flex flex-wrap rounded-lg bg-secondary/50 p-1 gap-1">
-              <button
-                onClick={() => setActiveSite("rafting")}
-                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
-                  activeSite === "rafting" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Adventure Demo
-              </button>
-              <button
-                onClick={() => setActiveSite("cafe")}
-                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
-                  activeSite === "cafe" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Café Demo
-              </button>
-            </div>
-            <p className="text-sm text-muted-foreground">Scroll inside the frame ↓</p>
-          </div>
-        </div>
-        
-        {activeSite === "rafting" ? (
-          <BrowserFrame url="rishirafting.in">
-            <RaftingSample />
-          </BrowserFrame>
-        ) : (
-          <BrowserFrame url="gangaleaf.in">
-            <SampleWebsite />
-          </BrowserFrame>
-        )}
-      </section>
-
       {/* GBP */}
-      <section id="gbp" className="mx-auto max-w-6xl px-5 py-12 scroll-mt-20">
-        <div className="mb-6">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary">02 · Service Part: Google Business Profile</p>
-          <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Before & after — same business, very different results.</h3>
-          <p className="mt-2 max-w-xl text-sm text-muted-foreground">An unoptimised listing barely shows up. A complete one shows on Google Maps the moment someone searches "café in Rishikesh".</p>
-          <p className="mt-2 text-sm text-muted-foreground">Benefit: Get discovered by nearby customers searching right now.</p>
+      <section id="gbp" className="mx-auto max-w-6xl px-5 py-16 scroll-mt-20">
+        <div className="grid gap-8 lg:grid-cols-3 lg:items-start mb-10">
+          <div className="lg:col-span-2 space-y-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              02 · Google Business Profile (GBP)
+            </span>
+            <h3 className="text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+              Before & after — same business, very different results.
+            </h3>
+            <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+              An unoptimized listing is practically invisible online. An optimized listing secures prime real estate in the Local 3-Pack, placing your brand directly in front of active searchers exactly when they want to buy.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-secondary/40 p-6 border border-border/80 space-y-3">
+            <p className="text-xs font-bold uppercase tracking-wider text-foreground">Immediate Business Benefits</p>
+            <ul className="space-y-2 text-xs text-muted-foreground">
+              <li className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                Dominates regional search keywords
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                Drives direct phone calls & maps directions
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                Converts cold traffic via review credibility
+              </li>
+            </ul>
+          </div>
         </div>
         <GbpMockup />
       </section>

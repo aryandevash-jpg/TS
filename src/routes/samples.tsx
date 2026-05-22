@@ -4,7 +4,6 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { BrowserFrame } from "@/components/site/BrowserFrame";
 import { SampleWebsite } from "@/components/site/SampleWebsite";
 import { RaftingSample } from "@/components/site/RaftingSample";
-import { MarlboroSample } from "@/components/site/MarlboroSample";
 import { GbpMockup } from "@/components/site/GbpMockup";
 import { BookingWidget } from "@/components/site/BookingWidget";
 import { SERVICES } from "@/components/site/services";
@@ -123,7 +122,7 @@ function AnalyticsCard() {
 }
 
 function SamplesPage() {
-  const [activeSite, setActiveSite] = useState<"cafe" | "rafting" | "marlboro">("cafe");
+  const [activeSite, setActiveSite] = useState<"rafting" | "cafe">("rafting");
   
   return (
     <>
@@ -186,14 +185,6 @@ function SamplesPage() {
           <div className="flex flex-col items-start md:items-end gap-3">
             <div className="flex flex-wrap rounded-lg bg-secondary/50 p-1 gap-1">
               <button
-                onClick={() => setActiveSite("cafe")}
-                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
-                  activeSite === "cafe" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Café Demo
-              </button>
-              <button
                 onClick={() => setActiveSite("rafting")}
                 className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
                   activeSite === "rafting" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
@@ -202,29 +193,25 @@ function SamplesPage() {
                 Adventure Demo
               </button>
               <button
-                onClick={() => setActiveSite("marlboro")}
+                onClick={() => setActiveSite("cafe")}
                 className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
-                  activeSite === "marlboro" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+                  activeSite === "cafe" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                Cinematic Homage
+                Café Demo
               </button>
             </div>
             <p className="text-sm text-muted-foreground">Scroll inside the frame ↓</p>
           </div>
         </div>
         
-        {activeSite === "cafe" ? (
-          <BrowserFrame url="gangaleaf.in">
-            <SampleWebsite />
-          </BrowserFrame>
-        ) : activeSite === "rafting" ? (
+        {activeSite === "rafting" ? (
           <BrowserFrame url="rishirafting.in">
             <RaftingSample />
           </BrowserFrame>
         ) : (
-          <BrowserFrame url="marlboro-study.design">
-            <MarlboroSample />
+          <BrowserFrame url="gangaleaf.in">
+            <SampleWebsite />
           </BrowserFrame>
         )}
       </section>

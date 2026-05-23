@@ -126,70 +126,112 @@ function AnalyticsCard() {
 }
 
 function SamplesPage() {
+  const [activeWebTab, setActiveWebTab] = useState<"rafting" | "cafe" | "vehicle">("rafting");
+
   return (
     <>
       {/* Website */}
       <section id="website" className="mx-auto max-w-6xl px-5 pt-16 pb-12 md:pt-24 scroll-mt-20">
-        <div className="mb-8">
+        <div className="mb-8 text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-primary">01 · Service Part: Website</p>
           <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Full sample websites</h3>
           <p className="mt-2 text-sm text-muted-foreground">Benefit: Build trust quickly and turn visitors into direct bookings.</p>
         </div>
+
+        {/* Tab Buttons */}
+        <div className="flex flex-col sm:flex-row gap-2 justify-center mb-8 bg-secondary/30 p-2 rounded-2xl border border-border/60 max-w-xl mx-auto">
+          <button
+            onClick={() => setActiveWebTab("rafting")}
+            className={`w-full rounded-xl px-5 py-3 text-xs font-bold transition-all border ${
+              activeWebTab === "rafting"
+                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                : "bg-background/50 text-muted-foreground border-border/40 hover:bg-secondary hover:text-foreground"
+            }`}
+          >
+            🛶 Rafting & Outdoors
+          </button>
+          <button
+            onClick={() => setActiveWebTab("cafe")}
+            className={`w-full rounded-xl px-5 py-3 text-xs font-bold transition-all border ${
+              activeWebTab === "cafe"
+                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                : "bg-background/50 text-muted-foreground border-border/40 hover:bg-secondary hover:text-foreground"
+            }`}
+          >
+            ☕ Café & Stay
+          </button>
+          <button
+            onClick={() => setActiveWebTab("vehicle")}
+            className={`w-full rounded-xl px-5 py-3 text-xs font-bold transition-all border ${
+              activeWebTab === "vehicle"
+                ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                : "bg-background/50 text-muted-foreground border-border/40 hover:bg-secondary hover:text-foreground"
+            }`}
+          >
+            ⚡ Vehicle Rental
+          </button>
+        </div>
         
         <div className="space-y-16">
           {/* Demo 1: Adventure / Rafting */}
-          <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">1</span>
-                Adventure Demo (Rafting & Outdoors)
-              </h4>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span>Scroll inside the frame ↓</span>
-                <span>·</span>
-                <span className="font-semibold text-primary">rishirafting.in</span>
+          {activeWebTab === "rafting" && (
+            <div className="space-y-4 animate-in fade-in duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">1</span>
+                  Adventure Demo (Rafting & Outdoors)
+                </h4>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span>Scroll inside the frame ↓</span>
+                  <span>·</span>
+                  <span className="font-semibold text-primary">rishirafting.in</span>
+                </div>
               </div>
+              <BrowserFrame url="rishirafting.in">
+                <RaftingSample />
+              </BrowserFrame>
             </div>
-            <BrowserFrame url="rishirafting.in">
-              <RaftingSample />
-            </BrowserFrame>
-          </div>
+          )}
 
           {/* Demo 2: Cafe / Restaurant */}
-          <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">2</span>
-                Café Demo (Ganga Leaf Café & Stay)
-              </h4>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span>Scroll inside the frame ↓</span>
-                <span>·</span>
-                <span className="font-semibold text-primary">gangaleaf.in</span>
+          {activeWebTab === "cafe" && (
+            <div className="space-y-4 animate-in fade-in duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">2</span>
+                  Café Demo (Ganga Leaf Café & Stay)
+                </h4>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span>Scroll inside the frame ↓</span>
+                  <span>·</span>
+                  <span className="font-semibold text-primary">gangaleaf.in</span>
+                </div>
               </div>
+              <BrowserFrame url="gangaleaf.in">
+                <SampleWebsite />
+              </BrowserFrame>
             </div>
-            <BrowserFrame url="gangaleaf.in">
-              <SampleWebsite />
-            </BrowserFrame>
-          </div>
+          )}
 
           {/* Demo 3: Vehicle Rental */}
-          <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">3</span>
-                Vehicle Rental Demo (Rishikesh Wheels)
-              </h4>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span>Scroll inside the frame ↓</span>
-                <span>·</span>
-                <span className="font-semibold text-primary">rishikeshwheels.in</span>
+          {activeWebTab === "vehicle" && (
+            <div className="space-y-4 animate-in fade-in duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">3</span>
+                  Vehicle Rental Demo (Rishikesh Wheels)
+                </h4>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span>Scroll inside the frame ↓</span>
+                  <span>·</span>
+                  <span className="font-semibold text-primary">rishikeshwheels.in</span>
+                </div>
               </div>
+              <BrowserFrame url="rishikeshwheels.in">
+                <VehicleSample />
+              </BrowserFrame>
             </div>
-            <BrowserFrame url="rishikeshwheels.in">
-              <VehicleSample />
-            </BrowserFrame>
-          </div>
+          )}
         </div>
       </section>
 

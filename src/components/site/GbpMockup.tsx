@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { 
   Star, MapPin, Phone, Clock, Globe, Camera, Search, 
   PhoneCall, Navigation, ExternalLink, ShieldCheck, 
@@ -124,12 +125,46 @@ function Stars({ n = 5 }: { n?: number }) {
 }
 
 export function GbpMockup() {
+  const [activeGbp, setActiveGbp] = useState<BusinessKey>("rafting");
+  const data = BUSINESSES[activeGbp];
+
   return (
-    <div className="w-full space-y-16">
-      {(Object.keys(BUSINESSES) as BusinessKey[]).map((key) => {
-        const data = BUSINESSES[key];
-        return (
-          <div key={key} className="space-y-6">
+    <div className="w-full space-y-6">
+      {/* Tab Buttons */}
+      <div className="flex flex-col sm:flex-row gap-2 justify-center mb-8 bg-secondary/30 p-2 rounded-2xl border border-border/60 max-w-xl mx-auto">
+        <button
+          onClick={() => setActiveGbp("rafting")}
+          className={`w-full rounded-xl px-5 py-3 text-xs font-bold transition-all border ${
+            activeGbp === "rafting"
+              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              : "bg-background/50 text-muted-foreground border-border/40 hover:bg-secondary hover:text-foreground"
+          }`}
+        >
+          🛶 Rafting & Adventure
+        </button>
+        <button
+          onClick={() => setActiveGbp("cafe")}
+          className={`w-full rounded-xl px-5 py-3 text-xs font-bold transition-all border ${
+            activeGbp === "cafe"
+              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              : "bg-background/50 text-muted-foreground border-border/40 hover:bg-secondary hover:text-foreground"
+          }`}
+        >
+          ☕ Café & Stay
+        </button>
+        <button
+          onClick={() => setActiveGbp("yoga")}
+          className={`w-full rounded-xl px-5 py-3 text-xs font-bold transition-all border ${
+            activeGbp === "yoga"
+              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              : "bg-background/50 text-muted-foreground border-border/40 hover:bg-secondary hover:text-foreground"
+          }`}
+        >
+          🧘 Yoga & Wellness
+        </button>
+      </div>
+
+      <div className="space-y-6 animate-in fade-in duration-300">
             {/* Business Title & Google Search Bar Mockup */}
             <div className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-soft)]">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center justify-between">
@@ -322,9 +357,7 @@ export function GbpMockup() {
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+      </div>
     </div>
   );
 }

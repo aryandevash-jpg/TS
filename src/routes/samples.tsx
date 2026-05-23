@@ -125,50 +125,53 @@ function AnalyticsCard() {
 }
 
 function SamplesPage() {
-  const [activeSite, setActiveSite] = useState<"rafting" | "cafe">("rafting");
-  
   return (
     <>
       {/* Website */}
       <section id="website" className="mx-auto max-w-6xl px-5 pt-16 pb-12 md:pt-24 scroll-mt-20">
-        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-primary">01 · Service Part: Website</p>
-            <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Full sample website</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Benefit: Build trust quickly and turn visitors into direct bookings.</p>
-          </div>
-          <div className="flex flex-col items-start md:items-end gap-3">
-            <div className="flex flex-wrap rounded-lg bg-secondary/50 p-1 gap-1">
-              <button
-                onClick={() => setActiveSite("rafting")}
-                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
-                  activeSite === "rafting" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Adventure Demo
-              </button>
-              <button
-                onClick={() => setActiveSite("cafe")}
-                className={`rounded-md px-4 py-1.5 text-sm font-medium transition-all ${
-                  activeSite === "cafe" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Café Demo
-              </button>
-            </div>
-            <p className="text-sm text-muted-foreground">Scroll inside the frame ↓</p>
-          </div>
+        <div className="mb-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-primary">01 · Service Part: Website</p>
+          <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Full sample websites</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Benefit: Build trust quickly and turn visitors into direct bookings.</p>
         </div>
         
-        {activeSite === "rafting" ? (
-          <BrowserFrame url="rishirafting.in">
-            <RaftingSample />
-          </BrowserFrame>
-        ) : (
-          <BrowserFrame url="gangaleaf.in">
-            <SampleWebsite />
-          </BrowserFrame>
-        )}
+        <div className="space-y-16">
+          {/* Demo 1: Adventure / Rafting */}
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">1</span>
+                Adventure Demo (Rafting & Outdoors)
+              </h4>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span>Scroll inside the frame ↓</span>
+                <span>·</span>
+                <span className="font-semibold text-primary">rishirafting.in</span>
+              </div>
+            </div>
+            <BrowserFrame url="rishirafting.in">
+              <RaftingSample />
+            </BrowserFrame>
+          </div>
+
+          {/* Demo 2: Cafe / Restaurant */}
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">2</span>
+                Café Demo (Ganga Leaf Café & Stay)
+              </h4>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span>Scroll inside the frame ↓</span>
+                <span>·</span>
+                <span className="font-semibold text-primary">gangaleaf.in</span>
+              </div>
+            </div>
+            <BrowserFrame url="gangaleaf.in">
+              <SampleWebsite />
+            </BrowserFrame>
+          </div>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-8">

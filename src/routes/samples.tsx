@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { BrowserFrame } from "@/components/site/BrowserFrame";
 import { SampleWebsite } from "@/components/site/SampleWebsite";
 import { RaftingSample } from "@/components/site/RaftingSample";
+import { VehicleSample } from "@/components/site/VehicleSample";
 import { GbpMockup } from "@/components/site/GbpMockup";
 import { BookingWidget } from "@/components/site/BookingWidget";
 import { SERVICES } from "@/components/site/services";
@@ -169,6 +170,24 @@ function SamplesPage() {
             </div>
             <BrowserFrame url="gangaleaf.in">
               <SampleWebsite />
+            </BrowserFrame>
+          </div>
+
+          {/* Demo 3: Vehicle Rental */}
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h4 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-xs text-primary font-bold">3</span>
+                Vehicle Rental Demo (Rishikesh Wheels)
+              </h4>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span>Scroll inside the frame ↓</span>
+                <span>·</span>
+                <span className="font-semibold text-primary">rishikeshwheels.in</span>
+              </div>
+            </div>
+            <BrowserFrame url="rishikeshwheels.in">
+              <VehicleSample />
             </BrowserFrame>
           </div>
         </div>
